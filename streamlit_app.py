@@ -25,9 +25,17 @@ goods = ["Rent", "Merch", "Debt", "Foods", "Drinks", "Petrol", "Shopping", "Othe
 expense_data = {}
 for good in goods:
     expense_data[good] = st.number_input(f"{goods} expense (thousand)", min_value = 0, value = 0, step = 10)
+    
+#Convert to DataFrame
+df = pd.DataFrame(expense_data.items(), columns= ["good", "Amount"]) # a data structure that organizes data into rows and columns
 
+# Calculate Total Expenses & Savings
+total_expense = df["Amount"].sum()
+saving = income - total_expense
 
+#show
+st.subheader("Fianace State")
+st.write(f"**Total Income:** {income}K")
+st.write(f"**Total Expense:** {total_expense}K")
+st.write(f"**Saving:** {saving}K")
 
-st.write(
-    "Let's start building! For help and inspiration, head over to [docs.streamlit.io](https://docs.streamlit.io/)."
-)
